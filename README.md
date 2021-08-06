@@ -1,2 +1,2 @@
-# Attention-based-group-wise-cost-voleme
-Attention-based group-wise cost volume for efficient stereo matching
+# Attention-based-group-wise-correlation-cost-voleme
+Efficient stereo matching via Attention-based group-wise correlation cost volume
