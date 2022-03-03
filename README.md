@@ -1,2 +1,2 @@
-# Attention-based-group-wise-correlation-cost-voleme
-Efficient stereo matching via Attention-based group-wise correlation cost volume
+# Attention Concatenation Volume for Accurate and Efficient Stereo Matching
+Stereo matching is a fundamental building block for many vision and robotics applications. An informativeand concise cost volume representation is vital for stereo matching of high accuracy and efficiency. In this paper, we present a novel cost volume construction method whichgenerates attention weights from correlation clues to suppress redundant information and enhance matching-relatedinformation in the concatenation volume.
