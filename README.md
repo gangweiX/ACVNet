@@ -1,3 +1,3 @@
-# GwcNet
-This is the implementation of the paper **Group-wise Correlation Stereo Network**, CVPR 19, Xiaoyang Guo, Kai Yang, Wukui Yang, Xiaogang Wang, and Hongsheng Li
+# ACVNet
+This is the implementation of the paper: **Attention Concatenation Volume for Accurate and Efficient Stereo Matching**, CVPR 2022, Gangwei Xu, Junda Cheng, Peng Guo, Xin Yang
 [\[Arxiv\]](https://arxiv.org/)
