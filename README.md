@@ -1,2 +1,3 @@
-# Attention Concatenation Volume for Accurate and Efficient Stereo Matching
-Stereo matching is a fundamental building block for many vision and robotics applications. An informativeand concise cost volume representation is vital for stereo matching of high accuracy and efficiency. In this paper, we present a novel cost volume construction method whichgenerates attention weights from correlation clues to suppress redundant information and enhance matching-relatedinformation in the concatenation volume.
+# ACVNet
+This is the implementation of the paper: **Attention Concatenation Volume for Accurate and Efficient Stereo Matching**, CVPR 2022, Gangwei Xu, Junda Cheng, Peng Guo, Xin Yang
+[\[Arxiv\]](https://arxiv.org/)
