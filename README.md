@@ -24,6 +24,10 @@ As an example, use the following command to train ACVNet on Scene Flow
 python main.py
 ```
 
+### Pretrained Model
+
+The pretrained model on Scene Flow Datasets is saved in ./checkpoints/model_sceneflow.ckpt
+
 ## Results on KITTI 2015 leaderboard
 [Leaderboard Link](http://www.cvlibs.net/datasets/kitti/eval_scene_flow.php?benchmark=stereo)
 
