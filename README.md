@@ -22,7 +22,6 @@ An informative and concise cost volume representation is vital for stereo matchi
 conda create -n acvnet python=3.8
 conda activate acvnet
 ```
-
 ### Dependencies
 
 ```
