@@ -63,6 +63,19 @@ The pretrained model on Scene Flow Datasets is saved in ./checkpoints/model_scen
 
 ![image](https://github.com/gangweiX/ACVNet/blob/main/imgs/acv_result.png)
 
+# Citarion
+
+If you find this project helpful in your research, welcome to cite the paper.
+
+```
+@article{xu2022ACVNet,
+  title={ACVNet: Attention Concatenation Volume for Accurate and Efficient Stereo Matching},
+  author={Gangwei Xu, Junda Cheng, Peng Guo, Xin Yang},
+  journal={arXiv:2203.02146},
+  year={2022}
+}
+
+```
 
 # Acknowledgements
 
