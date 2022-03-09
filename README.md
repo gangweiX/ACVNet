@@ -29,7 +29,7 @@ python main.py
 
 | Method | D1-bg (All) | D1-fg (All) | D1-all (All) | Runtime (s) |
 |---|---|---|---|---|
-| ACVNetNet | 1.37 % | 3.07 % | 1.65 % | 0.20 |
+| ACVNet | 1.37 % | 3.07 % | 1.65 % | 0.20 |
 | LEAStereo | 1.40 % | 2.91 % | 1.65 % | 0.30 |
 | GwcNet | 1.74 % | 3.93 % | 2.11 % | 0.32 |
 | PSMNet | 1.86 % | 4.62 % | 2.32 % | 0.41 |
