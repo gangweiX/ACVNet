@@ -34,6 +34,13 @@ python main.py
 | GwcNet | 1.74 % | 3.93 % | 2.11 % | 0.32 |
 | PSMNet | 1.86 % | 4.62 % | 2.32 % | 0.41 |
 
+## Qualitative results on Scene Flow Datasets, KITTI 2012 and KITTI 2015
+
+### The left column is left image, and the right column is results of our ACVNet.
+
+![image](https://github.com/gangweiX/ACVNet/blob/main/imgs/acv_result.png)
+
+
 # Acknowledgements
 
 Thanks to Xiaoyang Guo for opening source of his excellent work GwcNet. Our work is inspired by this work and part of codes are migrated from [GwcNet](https://github.com/xy-guo/GwcNet).
