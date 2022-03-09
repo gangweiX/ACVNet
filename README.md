@@ -6,7 +6,7 @@ This is the implementation of the paper: **Attention Concatenation Volume for Ac
 
 An informative and concise cost volume representation is vital for stereo matching of high accuracy and efficiency. In this paper, we present a novel cost volume construction method which generates attention weights from correlation clues to suppress redundant information and enhance matching-related information in the concatenation volume. To generate reliable attention weights, we propose multi-level adaptive patch matching to improve the distinctiveness of the matching cost at different disparities even for textureless regions.
 
-![image](https://github.com/gangweiX/ACVNet/blob/main/imgs/acv.png)
+![image](https://github.com/gangweiX/ACVNet/blob/main/imgs/acv_network.png)
 
 # How to use
 
