@@ -62,7 +62,7 @@ The pretrained model on Scene Flow Datasets is saved in ./checkpoints/model_scen
 
 ![image](https://github.com/gangweiX/ACVNet/blob/main/imgs/acv_result.png)
 
-# Citarion
+# Citation
 
 If you find this project helpful in your research, welcome to cite the paper.
 
