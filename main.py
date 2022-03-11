@@ -39,7 +39,7 @@ parser.add_argument('--epochs', type=int, default=50, help='number of epochs to 
 parser.add_argument('--lrepochs',default="20,32,40,44,48:2", type=str,  help='the epochs to decay lr: the downscale rate')
 #parser.add_argument('--lrepochs',default="300,500:2", type=str,  help='the epochs to decay lr: the downscale rate')
 
-parser.add_argument('--logdir',default='/data/xgw/test/checkpoint1/', help='the directory to save logs and checkpoints')
+parser.add_argument('--logdir',default='', help='the directory to save logs and checkpoints')
 parser.add_argument('--loadckpt', default='./checkpoints/model_sceneflow.ckpt',help='load the weights from a specific checkpoint')
 parser.add_argument('--resume', action='store_true', help='continue training the model')
 parser.add_argument('--seed', type=int, default=1, metavar='S', help='random seed (default: 1)')
@@ -71,7 +71,7 @@ optimizer = optim.Adam(model.parameters(), lr=args.lr, betas=(0.9, 0.999))
 #optimizer = optim.SGD(model.parameters(), lr = args.lr, momentum=0.9)
 
 # load parameters
-start_epoch = 6
+start_epoch = 0
 if args.resume:
     # find all checkpoints file and sort according to epoch id
     all_saved_ckpts = [fn for fn in os.listdir(args.logdir) if fn.endswith(".ckpt")]
