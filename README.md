@@ -1,5 +1,5 @@
 # ACVNet
-This is the implementation of the paper: **Attention Concatenation Volume for Accurate and Efficient Stereo Matching**, CVPR 2022, Gangwei Xu, Junda Cheng, Peng Guo, Xin Yang
+This is the implementation of the paper: **ACVNet: Attention Concatenation Volume for Accurate and Efficient Stereo Matching**, CVPR 2022, Gangwei Xu, Junda Cheng, Peng Guo, Xin Yang
 [\[Arxiv\]](https://arxiv.org/pdf/2203.02146.pdf)
 
 ## Introduction
@@ -11,7 +11,7 @@ An informative and concise cost volume representation is vital for stereo matchi
 # How to use
 
 ## Environment
-* python 3.8
+* Python 3.8
 * Pytorch 1.10
 
 ## Install
