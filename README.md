@@ -1,5 +1,5 @@
 # ACVNet (CVPR 2022)
-This is the implementation of the paper: [**ACVNet: Attention Concatenation Volume for Accurate and Efficient Stereo Matching**], CVPR 2022, Gangwei Xu, Junda Cheng, Peng Guo, Xin Yang
+This is the implementation of the paper: <font color=Blue>**ACVNet: Attention Concatenation Volume for Accurate and Efficient Stereo Matching**</font>, CVPR 2022, Gangwei Xu, Junda Cheng, Peng Guo, Xin Yang
 [\[Arxiv\]](https://arxiv.org/pdf/2203.02146.pdf)
 
 ## Introduction
