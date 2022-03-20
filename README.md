@@ -37,13 +37,25 @@ Download [Scene Flow Datasets](https://lmb.informatik.uni-freiburg.de/resources/
 ## Train
 As an example, use the following command to train ACVNet on Scene Flow
 
+Firstly, train attention weights generation network for 64 epochs,
+```
+python main.py --attention_weights_only True
+
+```
+Secondly, freeze attention weights generation network parameters, train the remaining network for another 64 epochs,
+```
+python main.py --freeze_attention_weights True
+
+```
+Finally, train the complete network for 64 epochs,
 ```
 python main.py
+
 ```
 
 ### Pretrained Model
 
-The pretrained model on Scene Flow Datasets is saved in ./checkpoints/model_sceneflow.ckpt
+The pretrained model on Scene Flow Datasets is saved in ./pretrained_model/pretrained_model_sceneflow.ckpt
 
 ## Results on KITTI 2015 leaderboard
 [Leaderboard Link](http://www.cvlibs.net/datasets/kitti/eval_scene_flow.php?benchmark=stereo)
