@@ -40,17 +40,14 @@ As an example, use the following command to train ACVNet on Scene Flow
 Firstly, train attention weights generation network for 64 epochs,
 ```
 python main.py --attention_weights_only True
-
 ```
 Secondly, freeze attention weights generation network parameters, train the remaining network for another 64 epochs,
 ```
 python main.py --freeze_attention_weights True
-
 ```
 Finally, train the complete network for 64 epochs,
 ```
 python main.py
-
 ```
 
 ### Pretrained Model
