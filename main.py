@@ -40,7 +40,7 @@ parser.add_argument('--attention_weights_only', default=False, type=str,  help='
 parser.add_argument('--freeze_attention_weights', default=False, type=str,  help='freeze attention weights parameters')
 #parser.add_argument('--lrepochs',default="300,500:2", type=str,  help='the epochs to decay lr: the downscale rate')
 parser.add_argument('--logdir',default='', help='the directory to save logs and checkpoints')
-parser.add_argument('--loadckpt', default='./checkpoints/pretrained_model_sceneflow.ckpt',help='load the weights from a specific checkpoint')
+parser.add_argument('--loadckpt', default='./pretrained_model/pretrained_model_sceneflow.ckpt',help='load the weights from a specific checkpoint')
 parser.add_argument('--resume', action='store_true', help='continue training the model')
 parser.add_argument('--seed', type=int, default=1, metavar='S', help='random seed (default: 1)')
 parser.add_argument('--summary_freq', type=int, default=20, help='the frequency of saving summary')
