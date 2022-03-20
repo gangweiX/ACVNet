@@ -14,7 +14,7 @@ import numpy as np
 import time
 from tensorboardX import SummaryWriter
 from datasets import __datasets__
-from models import __models__, model_loss_train, model_loss_test
+from models import __models__, model_loss_train_attn_only, model_loss_train_freeze_attn, model_loss_train, model_loss_test
 from utils import *
 from torch.utils.data import DataLoader
 import gc
@@ -27,7 +27,6 @@ os.environ['CUDA_VISIBLE_DEVICES'] = '0,1,2,3'
 parser = argparse.ArgumentParser(description='Attention Concatenation Volume for Accurate and Efficient Stereo Matching (ACVNet)')
 parser.add_argument('--model', default='acvnet', help='select a model structure', choices=__models__.keys())
 parser.add_argument('--maxdisp', type=int, default=192, help='maximum disparity')
-
 parser.add_argument('--dataset', default='sceneflow', help='dataset name', choices=__datasets__.keys())
 parser.add_argument('--datapath', default="/data/sceneflow/", help='data path')
 parser.add_argument('--trainlist', default='./filenames/train_scene_flow.txt', help='training list')
@@ -35,12 +34,13 @@ parser.add_argument('--testlist',default='./filenames/sceneflow_test.txt', help=
 parser.add_argument('--lr', type=float, default=0.001, help='base learning rate')
 parser.add_argument('--batch_size', type=int, default=20, help='training batch size')
 parser.add_argument('--test_batch_size', type=int, default=16, help='testing batch size')
-parser.add_argument('--epochs', type=int, default=50, help='number of epochs to train')
-parser.add_argument('--lrepochs',default="20,32,40,44,48:2", type=str,  help='the epochs to decay lr: the downscale rate')
+parser.add_argument('--epochs', type=int, default=64, help='number of epochs to train')
+parser.add_argument('--lrepochs',default="20,32,40,48,56:2", type=str,  help='the epochs to decay lr: the downscale rate')
+parser.add_argument('--attention_weights_only', default=False, type=str,  help='only train attention weights')
+parser.add_argument('--freeze_attention_weights', default=False, type=str,  help='freeze attention weights parameters')
 #parser.add_argument('--lrepochs',default="300,500:2", type=str,  help='the epochs to decay lr: the downscale rate')
-
 parser.add_argument('--logdir',default='', help='the directory to save logs and checkpoints')
-parser.add_argument('--loadckpt', default='./checkpoints/model_sceneflow.ckpt',help='load the weights from a specific checkpoint')
+parser.add_argument('--loadckpt', default='./checkpoints/pretrained_model_sceneflow.ckpt',help='load the weights from a specific checkpoint')
 parser.add_argument('--resume', action='store_true', help='continue training the model')
 parser.add_argument('--seed', type=int, default=1, metavar='S', help='random seed (default: 1)')
 parser.add_argument('--summary_freq', type=int, default=20, help='the frequency of saving summary')
@@ -60,11 +60,11 @@ logger = SummaryWriter(args.logdir)
 StereoDataset = __datasets__[args.dataset]
 train_dataset = StereoDataset(args.datapath, args.trainlist, True)
 test_dataset = StereoDataset(args.datapath, args.testlist, False)
-TrainImgLoader = DataLoader(train_dataset, args.batch_size, shuffle=True, num_workers=8, drop_last=True)
-TestImgLoader = DataLoader(test_dataset, args.test_batch_size, shuffle=False, num_workers=8, drop_last=False)
+TrainImgLoader = DataLoader(train_dataset, args.batch_size, shuffle=True, num_workers=16, drop_last=True)
+TestImgLoader = DataLoader(test_dataset, args.test_batch_size, shuffle=False, num_workers=16, drop_last=False)
 
 # model, optimizer
-model = __models__[args.model](args.maxdisp)
+model = __models__[args.model](args.maxdisp, args.attention_weights_only, args.freeze_attention_weights)
 model = nn.DataParallel(model)
 model.cuda()
 optimizer = optim.Adam(model.parameters(), lr=args.lr, betas=(0.9, 0.999))
@@ -95,23 +95,19 @@ print("start at epoch {}".format(start_epoch))
 
 
 def train():
-    #for epoch_idx in range(start_epoch, args.epochs):
     for epoch_idx in range(start_epoch, args.epochs):
         adjust_learning_rate(optimizer, epoch_idx, args.lr, args.lrepochs)
 
         # training
         for batch_idx, sample in enumerate(TrainImgLoader):
-
-            if batch_idx == 20:
-                break
             global_step = len(TrainImgLoader) * epoch_idx + batch_idx
             start_time = time.time()
             do_summary = global_step % args.summary_freq == 0
-            loss,scalar_outputs= train_sample(sample, compute_metrics=do_summary)
+            loss, scalar_outputs, image_outputs = train_sample(sample, compute_metrics=do_summary)
             if do_summary:
                 save_scalars(logger, 'train', scalar_outputs, global_step)
-            #del scalar_outputs, image_outputs
-            del scalar_outputs
+                save_images(logger, 'train', image_outputs, global_step)
+            del scalar_outputs, image_outputs
             print('Epoch {}/{}, Iter {}/{}, train loss = {:.3f}, time = {:.3f}'.format(epoch_idx, args.epochs,
                                                                                        batch_idx,
                                                                                        len(TrainImgLoader), loss,
@@ -125,28 +121,28 @@ def train():
             torch.save(checkpoint_data, "{}/checkpoint_{:0>6}.ckpt".format(args.logdir, epoch_idx))
         gc.collect()
 
-        # # testing
-        avg_test_scalars = AverageMeterDict()
-        for batch_idx, sample in enumerate(TestImgLoader):
+        if (epoch_idx) % 1 == 0:
 
-            global_step = len(TestImgLoader) * epoch_idx + batch_idx
-            start_time = time.time()
-            # do_summary = global_step % args.summary_freq == 0
-            do_summary = global_step % 1 == 0
-            loss, scalar_outputs, image_outputs = test_sample(sample, compute_metrics=do_summary)
-            if do_summary:
-               save_scalars(logger, 'test', scalar_outputs, global_step)
-               save_images(logger, 'test', image_outputs, global_step)
-            avg_test_scalars.update(scalar_outputs)
-            #del scalar_outputs, image_outputs
-            print('Epoch {}/{}, Iter {}/{}, test loss = {:.3f}, time = {:3f}'.format(epoch_idx, args.epochs,
-                                                                                     batch_idx,
-                                                                                     len(TestImgLoader), loss,
-                                                                                     time.time() - start_time))
-        avg_test_scalars = avg_test_scalars.mean()
-        save_scalars(logger, 'fulltest', avg_test_scalars, len(TrainImgLoader) * (epoch_idx + 1))
-        print("avg_test_scalars", avg_test_scalars)
-        gc.collect()
+        # # testing
+            avg_test_scalars = AverageMeterDict()
+            for batch_idx, sample in enumerate(TestImgLoader):    
+                global_step = len(TestImgLoader) * epoch_idx + batch_idx
+                start_time = time.time()
+                do_summary = global_step % args.summary_freq == 0
+                loss, scalar_outputs, image_outputs = test_sample(sample, compute_metrics=do_summary)
+                if do_summary:
+                   save_scalars(logger, 'test', scalar_outputs, global_step)
+                   save_images(logger, 'test', image_outputs, global_step)
+                avg_test_scalars.update(scalar_outputs)
+                del scalar_outputs, image_outputs
+                print('Epoch {}/{}, Iter {}/{}, test loss = {:.3f}, time = {:3f}'.format(epoch_idx, args.epochs,
+                                                                                         batch_idx,
+                                                                                         len(TestImgLoader), loss,
+                                                                                         time.time() - start_time))
+            avg_test_scalars = avg_test_scalars.mean()
+            save_scalars(logger, 'fulltest', avg_test_scalars, len(TrainImgLoader) * (epoch_idx + 1))
+            print("avg_test_scalars", avg_test_scalars)
+            gc.collect()
 
 
 # train one sample
@@ -159,7 +155,12 @@ def train_sample(sample, compute_metrics=False):
     optimizer.zero_grad()
     disp_ests = model(imgL, imgR)
     mask = (disp_gt < args.maxdisp) & (disp_gt > 0)
-    loss = model_loss_train(disp_ests, disp_gt, mask)
+    if args.attention_weights_only:
+        loss = model_loss_train_attn_only(disp_ests, disp_gt, mask)
+    elif args.freeze_attention_weights:
+        loss = model_loss_train_freeze_attn(disp_ests, disp_gt, mask)
+    else:
+        loss = model_loss_train(disp_ests, disp_gt, mask)
     scalar_outputs = {"loss": loss}
     image_outputs = {"disp_est": disp_ests, "disp_gt": disp_gt, "imgL": imgL, "imgR": imgR}
     if compute_metrics:
@@ -167,12 +168,12 @@ def train_sample(sample, compute_metrics=False):
             image_outputs["errormap"] = [disp_error_image_func.apply(disp_est, disp_gt) for disp_est in disp_ests]
             scalar_outputs["EPE"] = [EPE_metric(disp_est, disp_gt, mask) for disp_est in disp_ests]
             scalar_outputs["D1"] = [D1_metric(disp_est, disp_gt, mask) for disp_est in disp_ests]
-            # scalar_outputs["Thres1"] = [Thres_metric(disp_est, disp_gt, mask, 1.0) for disp_est in disp_ests]
-            # scalar_outputs["Thres2"] = [Thres_metric(disp_est, disp_gt, mask, 2.0) for disp_est in disp_ests]
-            # scalar_outputs["Thres3"] = [Thres_metric(disp_est, disp_gt, mask, 3.0) for disp_est in disp_ests]
+            scalar_outputs["Thres1"] = [Thres_metric(disp_est, disp_gt, mask, 1.0) for disp_est in disp_ests]
+            scalar_outputs["Thres2"] = [Thres_metric(disp_est, disp_gt, mask, 2.0) for disp_est in disp_ests]
+            scalar_outputs["Thres3"] = [Thres_metric(disp_est, disp_gt, mask, 3.0) for disp_est in disp_ests]
     loss.backward()
     optimizer.step()
-    return tensor2float(loss), tensor2float(scalar_outputs)
+    return tensor2float(loss), tensor2float(scalar_outputs), image_outputs
 
 
 # test one sample
@@ -197,7 +198,6 @@ def test_sample(sample, compute_metrics=True):
     scalar_outputs["Thres3"] = [Thres_metric(disp_est, disp_gt, mask, 3.0) for disp_est in disp_ests]
 
     return tensor2float(loss), tensor2float(scalar_outputs), image_outputs
-
 
 if __name__ == '__main__':
     train()
