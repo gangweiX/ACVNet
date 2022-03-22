@@ -1,4 +1,4 @@
-from .kitti_dataset_1215_mask_crop import KITTIDataset
+from .kitti_dataset_1215 import KITTIDataset
 from .sceneflow_dataset import SceneFlowDatset
 
 __datasets__ = {
