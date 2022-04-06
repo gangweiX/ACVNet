@@ -29,7 +29,7 @@ parser.add_argument('--model', default='acvnet', help='select a model structure'
 parser.add_argument('--maxdisp', type=int, default=192, help='maximum disparity')
 parser.add_argument('--dataset', default='sceneflow', help='dataset name', choices=__datasets__.keys())
 parser.add_argument('--datapath', default="/data/sceneflow/", help='data path')
-parser.add_argument('--trainlist', default='./filenames/train_scene_flow.txt', help='training list')
+parser.add_argument('--trainlist', default='./filenames/sceneflow_train.txt', help='training list')
 parser.add_argument('--testlist',default='./filenames/sceneflow_test.txt', help='testing list')
 parser.add_argument('--lr', type=float, default=0.001, help='base learning rate')
 parser.add_argument('--batch_size', type=int, default=20, help='training batch size')
