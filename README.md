@@ -26,7 +26,7 @@ conda activate acvnet
 ```
 conda install pytorch torchvision torchaudio cudatoolkit=11.1 -c pytorch -c nvidia
 pip install opencv-python
-pip install tensorboard
+pip install tensorboardX
 pip install matplotlib 
 pip install tqdm
 ```
