@@ -1,5 +1,14 @@
 # Fast-ACVNet
 Our significant extension version of ACV, named Fast-ACV, will be soon available at https://github.com/gangweiX/Fast-ACVNet
+
+| Method | D1-bg <br> (All) | D1-fg <br> (All) | D1-all <br> (All) | Runtime <br> (s) |
+|---|---|---|---|---|
+| ACVNet | 1.37 % | 3.07 % | 1.65 % | 0.20 |
+| LEAStereo | 1.40 % | 2.91 % | 1.65 % | 0.30 |
+| GwcNet | 1.74 % | 3.93 % | 2.11 % | 0.32 |
+| PSMNet | 1.86 % | 4.62 % | 2.32 % | 0.41 |
+
+
 # ACVNet (CVPR 2022)
 This is the implementation of the paper: [ACVNet: Attention Concatenation Volume for Accurate and Efficient Stereo Matching](https://arxiv.org/pdf/2203.02146.pdf), CVPR 2022, Gangwei Xu, Junda Cheng, Peng Guo, Xin Yang
 
