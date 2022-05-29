@@ -11,9 +11,9 @@ import matplotlib.pyplot as plt
 
 
 class KITTIDataset(Dataset):
-    def __init__(self, datapath, list_filename, training):
-        self.datapath_15 = '/home/xgw/data/KITTI_2015/'
-        self.datapath_12 = '/home/xgw/data/KITTI_2012/'
+    def __init__(self, kitti15_datapath, kitti12_datapath, list_filename, training):
+        self.datapath_15 = kitti15_datapath
+        self.datapath_12 = kitti12_datapath
         self.left_filenames, self.right_filenames, self.disp_filenames = self.load_path(list_filename)
         self.training = training
         if self.training:
@@ -116,3 +116,4 @@ class KITTIDataset(Dataset):
                         "right_pad": right_pad,
                         "left_filename": self.left_filenames[index],
                         "right_filename": self.right_filenames[index]}
+
