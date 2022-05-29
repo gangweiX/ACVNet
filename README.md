@@ -66,11 +66,16 @@ Finally, train the complete network for 64 epochs,
 python main.py
 ```
 
-Use the following command to train ACVNet on KITTI
+Use the following command to train ACVNet on KITTI (using pretrained model on Scene Flow)
 ```
 python main_kitti.py
-
 ```
+
+## Test
+```
+python test_sceneflow.py
+```
+
 
 
 ### Pretrained Model
