@@ -68,7 +68,7 @@ python main.py
 
 ### Pretrained Model
 
-[Scene Flow](https://drive.google.com/file/d/1C1NMGnZ7aOUNHG5CTNKGIgr99k_mDTfJ/view?usp=sharing)
+[Scene Flow](https://drive.google.com/drive/folders/1oY472efAgwCCSxtewbbA2gEtee-dlWSG?usp=sharing)
 
 ## Results on KITTI 2015 leaderboard
 [Leaderboard Link](http://www.cvlibs.net/datasets/kitti/eval_scene_flow.php?benchmark=stereo)
