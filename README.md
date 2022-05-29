@@ -68,7 +68,7 @@ python main.py
 
 ### Pretrained Model
 
-[Scene Flow](https://drive.google.com/drive/my-drive)
+[Scene Flow](https://drive.google.com/file/d/1C1NMGnZ7aOUNHG5CTNKGIgr99k_mDTfJ/view?usp=sharing)
 
 The pretrained model on Scene Flow Datasets is saved in ./pretrained_model/pretrained_model_sceneflow.ckpt
 
