@@ -103,10 +103,11 @@ python test_sceneflow.py
 If you find this project helpful in your research, welcome to cite the paper.
 
 ```
-@article{xu2022ACVNet,
-  title={ACVNet: Attention Concatenation Volume for Accurate and Efficient Stereo Matching},
-  author={Gangwei Xu, Junda Cheng, Peng Guo, Xin Yang},
-  journal={arXiv:2203.02146},
+@inproceedings{xu2022attention,
+  title={Attention Concatenation Volume for Accurate and Efficient Stereo Matching},
+  author={Xu, Gangwei and Cheng, Junda and Guo, Peng and Yang, Xin},
+  booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition},
+  pages={12981--12990},
   year={2022}
 }
 
