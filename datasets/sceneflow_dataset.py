@@ -72,4 +72,5 @@ class SceneFlowDatset(Dataset):
                     "right": right_img,
                     "disparity": disparity,
                     "top_pad": 0,
-                    "right_pad": 0}
+                    "right_pad": 0,
+                    "left_filename": self.left_filenames[index]}
