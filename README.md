@@ -14,7 +14,7 @@ Our Fast-ACVNet+ outperforms all the published real-time methods on Scene Flow, 
 
 
 # ACVNet (CVPR 2022)
-This is the implementation of the paper: [Attention Concatenation Volume for Accurate and Efficient Stereo Matching](https://arxiv.org/pdf/2203.02146.pdf), CVPR 2022, Gangwei Xu, Junda Cheng, Peng Guo, Xin Yang
+This is the implementation of the paper: [Attention Concatenation Volume for Accurate and Efficient Stereo Matching](https://openaccess.thecvf.com/content/CVPR2022/papers/Xu_Attention_Concatenation_Volume_for_Accurate_and_Efficient_Stereo_Matching_CVPR_2022_paper.pdf), CVPR 2022, Gangwei Xu, Junda Cheng, Peng Guo, Xin Yang
 
 ## Introduction
 
