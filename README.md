@@ -39,10 +39,10 @@ conda activate acvnet
 ### Dependencies
 
 ```
-conda install pytorch torchvision torchaudio cudatoolkit=11.1 -c pytorch -c nvidia
+conda install pytorch torchvision torchaudio cudatoolkit=11.3 -c pytorch -c nvidia
 pip install opencv-python
 pip install scikit-image
-pip install tensorboardX
+pip install tensorboard
 pip install matplotlib 
 pip install tqdm
 ```
