@@ -77,10 +77,9 @@ python test_sceneflow.py
 ```
 
 
-
 ### Pretrained Model
 
-[Scene Flow](https://drive.google.com/drive/folders/1oY472efAgwCCSxtewbbA2gEtee-dlWSG?usp=sharing)
+[Scene Flow](https://drive.google.com/drive/folders/1oY472efAgwCCSxtewbbA2gEtee-dlWSG?usp=share_link)
 
 ## Results on KITTI 2015 leaderboard
 [Leaderboard Link](http://www.cvlibs.net/datasets/kitti/eval_scene_flow.php?benchmark=stereo)
