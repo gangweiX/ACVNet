@@ -1,5 +1,5 @@
 # Fast-ACVNet
-Our significant extension version of ACV, named Fast-ACV, is available at https://github.com/gangweiX/Fast-ACVNet
+Our significant extension version of ACV, named Fast-ACV, is available at [Paper](https://arxiv.org/pdf/2209.12699.pdf), [Code](https://github.com/gangweiX/Fast-ACVNet)
 
 | Method | Scene Flow <br> (EPE) | KITTI 2012 <br> (3-all) | KITTI 2015 <br> (D1-all) | Runtime (ms) |
 |---|---|---|---|---|
