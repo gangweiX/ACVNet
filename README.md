@@ -85,7 +85,7 @@ python test_sceneflow.py
 [Leaderboard Link](http://www.cvlibs.net/datasets/kitti/eval_scene_flow.php?benchmark=stereo)
 
 | Method | D1-bg (All) | D1-fg (All) | D1-all (All) | Runtime (s) |
-|---|---|---|---|---|
+|:-:|:-:|:-:|:-:|:-:|
 | ACVNet | 1.37 % | 3.07 % | 1.65 % | 0.20 |
 | LEAStereo | 1.40 % | 2.91 % | 1.65 % | 0.30 |
 | GwcNet | 1.74 % | 3.93 % | 2.11 % | 0.32 |
