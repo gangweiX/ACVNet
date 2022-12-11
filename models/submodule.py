@@ -253,7 +253,7 @@ def patch_aggregation(gwc_volume, patch_weight):
 
     gwc_volume_pad = torch.nn.functional.pad(gwc_volume,pad=(1,1,1,1), mode="constant",value=0)
     gwc_volume_pad_unfold = gwc_volume_pad.unfold(3,3,1).unfold(4,3,1)   # [N,C,D,H,W,3,3]
-    gwc_volume_pad_unfold = gwc_volume_pad_unfold.contiguous().view(gwc_volumed.shape[0], gwc_volume.shape[1], gwc_volume.shape[2], gwc_volume.shape[3],gwc_volume.shape[4], -1).permute(0,1,5,2,3,4)
+    gwc_volume_pad_unfold = gwc_volume_pad_unfold.contiguous().view(gwc_volume.shape[0], gwc_volume.shape[1], gwc_volume.shape[2], gwc_volume.shape[3],gwc_volume.shape[4], -1).permute(0,1,5,2,3,4)
     gwc_volume_pad_unfold = patch_weight.view(gwc_volume.shape[0], gwc_volume.shape[1], 1, gwc_volume.shape[2], gwc_volume.shape[3],gwc_volume.shape[4]) * gwc_volume_pad_unfold
     gwc_volume = torch.sum(gwc_volume_pad_unfold, dim=2)
     return gwc_volume
