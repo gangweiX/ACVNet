@@ -101,7 +101,7 @@ python test_sceneflow.py
 
 If you find this project helpful in your research, welcome to cite the paper.
 
-```
+```bibtex
 @inproceedings{xu2022attention,
   title={Attention Concatenation Volume for Accurate and Efficient Stereo Matching},
   author={Xu, Gangwei and Cheng, Junda and Guo, Peng and Yang, Xin},
