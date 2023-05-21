@@ -31,7 +31,7 @@ parser.add_argument('--maxdisp', type=int, default=192, help='maximum disparity'
 parser.add_argument('--dataset', default='sceneflow', help='dataset name', choices=__datasets__.keys())
 parser.add_argument('--datapath', default="/data/sceneflow/", help='data path')
 parser.add_argument('--testlist',default='./filenames/sceneflow_test.txt', help='testing list')
-parser.add_argument('--loadckpt', default='/home/xgw/ACVNet_1/pretrained_model/sceneflow.ckpt',help='load the weights from a specific checkpoint')
+parser.add_argument('--loadckpt', default='./pretrained_model/sceneflow.ckpt',help='load the weights from a specific checkpoint')
 # parse arguments
 args = parser.parse_args()
 
