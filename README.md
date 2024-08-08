@@ -110,8 +110,8 @@ If you find this project helpful in your research, welcome to cite the paper.
   year={2022}
 }
 
-@article{xu2022accurate,
-  title={Accurate and Efficient Stereo Matching via Attention Concatenation Volume},
+@article{xu2023accurate,
+  title={Accurate and efficient stereo matching via attention concatenation volume},
   author={Xu, Gangwei and Wang, Yun and Cheng, Junda and Tang, Jinhui and Yang, Xin},
   journal={IEEE Transactions on Pattern Analysis and Machine Intelligence},
   year={2023},
